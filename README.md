@@ -2,24 +2,24 @@
 
 ## 🔍 Overview
 
-The **MARAG system** is an advanced framework designed to process and analyze complex financial data. By integrating retrieval, reasoning, and generation capabilities, it offers a cutting-edge solution for financial data challenges. Leveraging specialized language models like **FinGPT** and adaptive retrieval mechanisms, MARAG ensures robust reasoning, dynamic adaptability, and adherence to responsible AI practices.
+The **MARAG system** is a sophisticated framework designed to analyze and process complex financial data. By integrating capabilities for retrieval, reasoning, and data generation, it provides an innovative solution to financial data challenges. Utilizing specialized language models like **FinGPT** and adaptive retrieval techniques, MARAG delivers strong reasoning capabilities, adaptability to changing datasets, and compliance with ethical AI standards.
 
 ---
 
 ## 🌐 Features
 
-- 🔍 **Advanced Retrieval Mechanisms**: Efficient data extraction and processing.
-- 🤖 **Robust Reasoning**: Enhanced decision-making capabilities for financial data.
-- 🌟 **Dynamic Adaptability**: Seamless handling of evolving datasets.
-- ⚖️ **Responsible AI Practices**: Ethical and accurate data management.
+- 🔍 **Advanced Data Retrieval**: Streamlined extraction and processing of financial information.
+- 🤖 **Enhanced Reasoning**: Improved decision-making for financial data analysis.
+- 🌟 **Adaptive System**: Efficiently handles dynamic and evolving datasets.
+- ⚖️ **Ethical AI Practices**: Ensures responsible and accurate data management.
 
 ---
 
 ## 💻 Technologies Used
 
-- **🤖 Language Models**: FinGPT, specialized for financial data.
-- **🔄 Adaptive Retrieval Mechanisms**: For efficient data management and processing.
-- **🤝 Multi-Agent Framework**: Enables collaborative data handling and reasoning.
+- **🤖 Language Models**: FinGPT, tailored for financial data applications.
+- **🔄 Adaptive Retrieval Systems**: For optimized data management and processing.
+- **🤝 Multi-Agent Framework**: Facilitates collaborative data handling and analysis.
 
 ---
 
@@ -30,22 +30,22 @@ The **MARAG system** is an advanced framework designed to process and analyze co
    git clone https://github.com/username/MARAG.git
    cd MARAG
    ```
-2. 🛠️ Install the required dependencies:
+2. 🛠️ Install the necessary dependencies:
    ```bash
    pip install -r requirements.txt
    ```
-3. 🆙 Set up any additional configuration as needed (e.g., API keys for external data sources).
+3. 🆙 Configure additional settings as required, such as API keys for external data sources.
 
 ---
 
 ## 🚀 Usage
 
-1. 🔊 Run the main script to start the MARAG system:
+1. 🔊 Start the MARAG system by running the main script:
    ```bash
    python main.py
    ```
-2. 📈 Input financial data or connect the system to a data stream.
-3. 🔄 Review the outputs, including data insights, reasoning, and generation results.
+2. 📈 Provide financial data or connect the system to a live data stream.
+3. 🔄 Review the generated insights, reasoning results, and data analysis outputs.
 
 ---
 
@@ -57,30 +57,35 @@ MARAG/
 ├── models/              # Pre-trained and fine-tuned models
 ├── src/                 # Source code
 ├── tests/               # Unit tests
-├── requirements.txt     # Dependencies
+├── requirements.txt     # Dependency list
 ├── README.md            # Project documentation
-└── main.py              # Entry point of the system
+└── main.py              # Main entry point
 ```
 
 ---
 
 ## 📚 Contributing
 
-We welcome contributions to enhance MARAG. Please follow these steps:
+Contributions to improve MARAG are welcome. To contribute:
 
 1. 🔄 Fork the repository.
-2. 📊 Create a new branch for your feature or bug fix.
-3. 📢 Submit a pull request with a detailed description of your changes.
+2. 📊 Create a new branch for your changes:
+   ```bash
+   git checkout -b feature-name
+   ```
+3. 🛠️ Implement your changes and test them thoroughly.
+4. 📢 Submit a pull request with a detailed summary of your modifications.
 
 ---
 
 ## ✉️ License
 
-This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
+This project is distributed under the **MIT License**. Refer to the [LICENSE](LICENSE) file for additional details.
 
 ---
 
 ## 📢 Contact
 
-For any questions or feedback, feel free to reach out at 2022eeb1217@iitrpr.ac.in. We'd love to hear from you! 😊
+For questions or feedback, please reach out at 2022eeb1217@iitrpr.ac.in. We look forward to hearing from you! 😊
+
 
