@@ -27,7 +27,7 @@ The **MARAG system** is a sophisticated framework designed to analyze and proces
 
 1. 🔍 Clone the repository:
    ```bash
-   [git clone https://github.com/username/MARAG.git](https://github.com/SumitBahl02/MARAG.git)
+   https://github.com/SumitBahl02/MARAG.git
    cd MARAG
    ```
 2. 🛠️ Install the necessary dependencies:
