@@ -1,13 +1,38 @@
+"""
+MARAG: Multi-Agent Orchestration Framework
+Advanced Multi-Agent System for Financial Analysis and Task Coordination
+
+This module implements a sophisticated multi-agent framework that coordinates
+multiple AI agents to solve complex financial analysis tasks. The system uses
+LangGraph for agent orchestration and LangChain for tool integration.
+
+Key Features:
+- Dynamic task planning and decomposition
+- Specialized agent coordination
+- Tool-based execution framework
+- Human-in-the-loop capabilities
+- Financial domain expertise
+- Concurrent task execution with dependency management
+
+Architecture:
+- Task Planner: Decomposes complex queries into subtasks
+- Agent Manager: Coordinates multiple specialized agents
+- Tool Executor: Handles tool invocation and result aggregation
+- Response Joiner: Combines results into coherent responses
+
+Author: Sumit Bahl
+GitHub: https://github.com/SumitBahl02/MARAG
+"""
+
 import getpass
 import os
-from langchain_community.tools.tavily_search import TavilySearchResults
-from langchain_openai import ChatOpenAI
-from math_tools import get_math_tool
-from financial_markets import *
-from openai import OpenAI
-os.environ['OPENAI_API_KEY'] = "YOUR_OPENAI_API_KEY"
-client = OpenAI()
-from typing import Sequence
+from typing import Sequence, Union, Dict, Any, List, Iterable
+import time
+import re
+from concurrent.futures import ThreadPoolExecutor, wait
+from functools import partial
+
+# LangChain core components
 from langchain import hub
 from langchain_core.language_models import BaseChatModel
 from langchain_core.messages import (
@@ -15,17 +40,55 @@ from langchain_core.messages import (
     FunctionMessage,
     HumanMessage,
     SystemMessage,
+    AIMessage,
 )
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.runnables import RunnableBranch
+from langchain_core.runnables import RunnableBranch, as_runnable
 from langchain_core.tools import BaseTool
+
+# External services and tools
+from langchain_community.tools.tavily_search import TavilySearchResults
 from langchain_openai import ChatOpenAI
-from output_parser import LLMCompilerPlanParser, Task
+from openai import OpenAI
+
+# LangGraph components for multi-agent orchestration
+from langgraph.graph import END, StateGraph, START
+from langgraph.graph.message import add_messages
 from langgraph.checkpoint.memory import MemorySaver
 
+# Custom modules
+from math_tools import get_math_tool
+from financial_markets import *
+from output_parser import LLMCompilerPlanParser, Task
+
+# Pydantic models for structured data
+from pydantic import BaseModel, Field
+from typing_extensions import TypedDict, Annotated
+
+# Load environment variables
+from dotenv import load_dotenv
+load_dotenv()
+
+# Configuration - Replace with actual API key
+os.environ['OPENAI_API_KEY'] = os.getenv("OPENAI_API_KEY", "YOUR_OPENAI_API_KEY")
+client = OpenAI()
+
 def create_planner(
-    llm: BaseChatModel, tools: Sequence[BaseTool], base_prompt: ChatPromptTemplate
-):
+    llm: BaseChatModel, 
+    tools: Sequence[BaseTool], 
+    base_prompt: ChatPromptTemplate
+) -> ChatPromptTemplate:
+    """
+    Create a task planner that decomposes complex queries into manageable subtasks.
+    
+    Args:
+        llm: The language model to use for planning
+        tools: Available tools for task execution
+        base_prompt: Base prompt template for the planner
+        
+    Returns:
+        Configured planner prompt template
+    """
     tool_descriptions = "\n".join(
         f"{i+1}. {tool.description}\n"
         for i, tool in enumerate(

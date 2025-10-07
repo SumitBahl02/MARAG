@@ -1,31 +1,60 @@
+"""
+MARAG: Multi-Agent Retrieval-Augmented Generation System
+Advanced RAG Implementation for Financial Document Analysis
+
+This module implements a sophisticated RAG (Retrieval-Augmented Generation) system
+that combines vector database search with web search capabilities for comprehensive
+financial document analysis and question answering.
+
+Key Features:
+- Adaptive retrieval strategy (vector search vs web search)
+- Multi-agent coordination for complex queries
+- Financial document processing and analysis
+- Real-time web search integration
+- Context-aware response generation
+
+Author: Sumit Bahl
+GitHub: https://github.com/SumitBahl02/MARAG
+"""
+
+# Core LangChain imports for RAG pipeline
 from langchain.text_splitter import RecursiveCharacterTextSplitter #type: ignore
 from langchain_community.document_loaders import WebBaseLoader#type: ignore
 from langchain_community.vectorstores import Chroma#type: ignore
 from langchain_openai import OpenAIEmbeddings#type: ignore
 from langchain_core.prompts import ChatPromptTemplate#type: ignore
 from langchain_openai import ChatOpenAI#type: ignore
+
+# Type definitions and validation
 from pydantic import BaseModel, Field#type: ignore
 from typing import Literal, List
 from typing_extensions import TypedDict
+
+# LangChain components
 from langchain.schema import Document#type: ignore
 from langchain import hub#type: ignore
 from langchain_core.output_parsers import StrOutputParser#type: ignore
 from langchain_community.tools.tavily_search import TavilySearchResults#type: ignore
 from langgraph.graph import END, StateGraph, START#type: ignore
+
+# Utilities and external services
 from pprint import pprint
 import os
 from dotenv import load_dotenv#type: ignore
 from langchain.tools import StructuredTool
 from llama_index.retrievers.pathway import PathwayRetriever
-import os
-from dotenv import load_dotenv
 from langchain_community.vectorstores import PathwayVectorClient
+
+# Load environment variables
 load_dotenv()
 
-os.environ['OPENAI_API_KEY'] = "YOUR_OPENAI_API_KEY"
+# Configuration - Replace with actual API key
+os.environ['OPENAI_API_KEY'] = os.getenv("OPENAI_API_KEY", "YOUR_OPENAI_API_KEY")
 
+# Initialize Pathway Vector Database Client
+# This connects to a specialized vector database for financial documents
 client = PathwayVectorClient(
-    url="http://172.30.2.194:8767",
+    url=os.getenv("PATHWAY_URL", "http://172.30.2.194:8767"),
 )
 
 
